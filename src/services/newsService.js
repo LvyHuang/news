@@ -5,12 +5,12 @@ import {APPCODE} from "./config"
 * 获取所有的新闻类别
  */
 export async function getNewsChannels() {
-    var resp = await axios.get("http://ali-news.showapi.com/newsList",{
+    var resp = await axios.get("http://ali-news.showapi.com/channelList",{
         headers:{
             Authorization:`APPCODE ${APPCODE}`,
         },
     });
-    return resp.data.showapi_res_body.pagebean.contentlist;
+    return resp.data.showapi_res_body.channelList;
 }
 
 /*
@@ -29,10 +29,9 @@ export async function getNews (channelId, page=1, limit=10) {
             channelId,
             page,
             maxResult: limit,
-            needAllList: false
+            needAllList: false,
+            needContent: 1,
         }
     });
     return resp.data.showapi_res_body.pagebean;
 }
-
-getNews("356c1e604476c6f6e0497025eb0e6c0d");
