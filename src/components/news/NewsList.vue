@@ -3,7 +3,7 @@
        <div v-for="item in news" :key="item.id" class="news-item-normal">
             <div class="image" v-if="item.havePic">
                 <a :href="item.link"></a>
-                <img :src="item.img" alt="">
+                <img :src="item.imageurls[0].url" alt="">
             </div>
            <div class="words">
                <h2 class="title">
@@ -59,7 +59,7 @@
     .aside {
         font-size: 14px;
         color: #888;
-        margin-top: 7px;
+        margin-top: 10px;
     }
     .aside span {
         margin-right: 15px;
@@ -67,6 +67,7 @@
 
     .content {
         max-height: 100px;
+        min-height: 60px;
         overflow: hidden;
         line-height: 2;
     }
