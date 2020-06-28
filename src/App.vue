@@ -3,7 +3,12 @@
     <div style="width: 1080px;margin: 0 auto">
       <Banner :banners="banners"/>
       <Channels @chooseIdChange="handleChange"/>
+      <Center>
+        <Loading/>
+      </Center>
       <NewsList :news="news"/>
+
+
     </div>
 
   </div>
@@ -15,12 +20,16 @@
   import Channels from "./components/news/Channels";
   import NewsList from "./components/news/NewsList";
   import {getNews} from "./services/newsService";
+  import Loading from "./components/Loading";
+  import Center from "./components/Center"
 
   export default {
     components:{
       Banner,
       Channels,
-      NewsList
+      NewsList,
+      Loading,
+      Center
     },
     data(){
       return {
@@ -34,12 +43,12 @@
     },
     async created() {
       var resp = await getNews("5572a108b3cdc86cf39001cd");
-      console.log(resp);
       this.news = resp.contentlist;
     },
     methods:{
-      handleChange(newId){
-        console.log(newId);
+      async handleChange(newId){
+        var resp = await getNews(newId);
+        this.news = resp.contentlist;
       }
     }
   };
