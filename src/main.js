@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import "./assets/style/global.css"
 import "./assets/style/reset.css"
-
+import router from "./router";
 //import {getNewsChannels} from "./services/newsService"
 
 /*
@@ -25,4 +25,5 @@ getNewsChannels().then((resp)=>{
 // test2();
 new Vue({
   render: h => h(App),
+  router:router   //3.配置路由到vue实例中
 }).$mount('#app')
