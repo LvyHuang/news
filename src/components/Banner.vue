@@ -47,7 +47,7 @@
                 this.timer = setInterval(()=>{
                     this.index = ++this.index % this.banners.length;
 
-                },2000)
+                },this.duration)
             },
             autoStop(){
                 clearInterval(this.timer);

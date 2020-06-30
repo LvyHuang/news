@@ -24,9 +24,9 @@ export default {
     data(){
         return {
             banners:[
-                {url:require("../assets/banner/banner1.jpeg"), link:"https://baidu.com"},
-                {url:require("../assets/banner/banner2.jpeg"), link:"https://zhihu.com"},
-                {url:require("../assets/banner/banner3.jpeg"), link:"https://sougou.com"},
+                {url:require("../assets/banner/banner1.png"), link:""},
+                {url:require("../assets/banner/banner2.png"), link:""},
+                {url:require("../assets/banner/banner3.png"), link:""},
             ],
             news:[],
             isLoading:true,
