@@ -1,13 +1,27 @@
 <template>
     <div>
-        某个频道的页面,渲染的频道id是{{$route.params.id}}
+        <pager :page="page" :limit="10" :total="2011" :pannel-number="6" @pageChange="handleChange"/>
     </div>
 </template>
 
 <script>
+    import Pager from "../components/Pager";
     export default {
+        components:{
+          Pager,
+        },
+        data(){
+          return {
+              page:3,
+          }
+        },
         created(){
 
+        },
+        methods:{
+            handleChange(newPage){
+                this.page = newPage;
+            }
         }
     }
 
