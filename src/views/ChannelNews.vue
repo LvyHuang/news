@@ -1,6 +1,6 @@
 <template>
     <div>
-        <pager :page="page" :limit="10" :total="2011" :pannel-number="6" @pageChange="handleChange"/>
+        <pager :page="page" :limit="10" :total="2011" :panel-number="10" @pageChange="handleChange"/>
     </div>
 </template>
 

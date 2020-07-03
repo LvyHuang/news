@@ -1,13 +1,25 @@
 <template>
     <div class="pager" v-if="total>0">
-        <a href="" class="pager-item" :class="{
+        <a class="pager-item" :class="{
             disabled: page ===1
            }"
         @click.prevent="handleChange(1)">首页</a>
-        <a href="" class="pager-item" :class="{
+        <a class="pager-item" :class="{
             disabled: page ===1
            }"
-           @click.prevent="handleChange(page -1 )">上一页</a>
+           @click.prevent="handleChange(page - 1 )">上一页</a>
+        <a class="pager-item" v-for="item in numbers" :key="item" @click.prevent="handleChange(item)"
+           :class="{
+            active: item === page
+           }">{{item}}</a>
+        <a class="pager-item" :class="{
+            disabled: page === pageNumber
+           }"
+           @click.prevent="handleChange(page + 1 )">下一页</a>
+        <a class="pager-item" :class="{
+            disabled: page === pageNumber
+           }"
+           @click.prevent="handleChange(pageNumber)">尾页</a>
 
         <span class="page-text">
             <i>{{page}}</i>
@@ -35,7 +47,7 @@
                 default:10,
                 type:Number,
             },
-            pannelNumber:{
+            panelNumber:{
                 //最多显示多少个数字页码
                 default:10,
                 type:Number,
@@ -46,6 +58,24 @@
             pageNumber() {
                 return Math.ceil(this.total / this.limit);
             },
+            minNumber(){
+                //计算当前显示的最小的页码数字
+                var n = this.page - this.panelNumber/2;
+                if(n < 1){ n =1; }
+                return n;
+            },
+            maxNumber(){
+              var n = this.minNumber + this.panelNumber -1;
+              if(n > this.pageNumber){ n = this.pageNumber; }
+              return n;
+            },
+            numbers(){
+                var nums = [];
+                for(var i = this.minNumber; i<=this.maxNumber; i++){
+                    nums.push(i);
+                }
+                return nums;
+            }
         },
         methods:{
             handleChange(newPage){
