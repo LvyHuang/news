@@ -8,7 +8,7 @@
                     </router-link>
                 </div>
                 <ul class="nav">
-                    <li><router-link :to="{name:'Home'}">首页</router-link>></li>
+                    <li><router-link :to="{name:'Home'}">首页</router-link></li>
                     <li v-for="item in channels.slice(0,5)" :key="item.channelId">
                         <router-link :to="{
                               name:'ChannelNews',
