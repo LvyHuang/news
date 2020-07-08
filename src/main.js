@@ -3,27 +3,11 @@ import App from './App.vue'
 import "./assets/style/global.css"
 import "./assets/style/reset.css"
 import router from "./router";
-//import {getNewsChannels} from "./services/newsService"
+import store from "./store/index"
 
-/*
-//第一种使用方式
-getNewsChannels().then((resp)=>{
-  console.log(resp);
-})
-*/
-//第二种使用方式
-// async function test() {
-//   var resp = await getNewsChannels();
-//   console.log(resp);
-// }
-// test();
 
-// async function test2() {
-//   var resp = await getNews("5572a109b3cdc86cf39001db",2,5);
-//   console.log(resp);
-// }
-// test2();
 new Vue({
   render: h => h(App),
-  router:router   //3.配置路由到vue实例中
+  router:router,   //3.配置路由到vue实例中
+  store:store,
 }).$mount('#app')
