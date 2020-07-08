@@ -28,7 +28,6 @@
         },
         data() {
             return {
-                channelName: "",
                 limit: 15,
                 total: 0,
                 panelNumber: 10,
@@ -40,16 +39,17 @@
             page() {
                 return +this.$route.query.page || 1;
             },
+            // 获取频道名称
+            channelName(){
+                var channels = this.$store.state.channels.data;
+                if(channels.length>0){
+                   var channel = channels.find((item) => item.channelId === this.$route.params.id);
+                   return channel.name;
+                }
+                return "";
+            }
         },
         methods: {
-            // 设置频道名称
-            async setChannelName() {
-                var channels = await newsServ.getNewsChannels();
-                var channel = channels.find(
-                    (item) => item.channelId === this.$route.params.id
-                );
-                this.channelName = channel.name;
-            },
             // 设置所有新闻相关数据
             async setDatas() {
                 this.isLoading = true;
@@ -78,7 +78,6 @@
             "$route.params.id": {
                 immediate: true, //一开始的数据也要当做是一种变化
                 handler() {
-                    this.setChannelName();
                     this.setDatas();
                 },
             },

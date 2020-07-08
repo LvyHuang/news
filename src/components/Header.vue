@@ -9,7 +9,7 @@
                 </div>
                 <ul class="nav">
                     <li><router-link :to="{name:'Home'}">首页</router-link></li>
-                    <li v-for="item in channels.slice(0,5)" :key="item.channelId">
+                    <li v-for="item in data.slice(0,5)" :key="item.channelId">
                         <router-link :to="{
                               name:'ChannelNews',
                               params: {
@@ -18,6 +18,7 @@
                             }">{{item.name}}
                         </router-link>
                     </li>
+
                 </ul>
                 <div class="user">
                     <router-link :to="{name:'Login'}">登录</router-link>
@@ -29,17 +30,10 @@
 </template>
 
 <script>
-    import {getNewsChannels} from "../services/newsService";
+    import {mapState} from "vuex";
 
     export default {
-        data(){
-            return {
-                channels:[]
-            }
-        },
-        async created() {
-            this.channels = await getNewsChannels();
-        }
+        computed: mapState("channels", ["data", "isLoading"]),
     }
 </script>
 

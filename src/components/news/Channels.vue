@@ -1,5 +1,5 @@
 <template>
-    <div class="news-types">
+    <div class="news-types" v-if="data.length > 0">
         <div class="item" v-for="item in showChannels" :key="item.channelId"
              :class="{active:item.channelId===chooseId}" @click="switchTo(item.channelId)"><span class="name">{{item.name}}</span></div>
         <a @click.prevent="isCollapsed=!isCollapsed">{{ isCollapsed ? "展开" : "收起" }}</a>
@@ -7,31 +7,36 @@
 </template>
 
 <script>
-    import {getNewsChannels} from "../../services/newsService"
-    export default {
+    import {mapState} from "vuex"
+     export default {
         data(){
             return {
-                channels:[],
                 isCollapsed:true,   //当前是否为折叠状态
                 chooseId: null,     //当前选中的频道Id
             }
         },
         computed:{
+            ...mapState("channels", ["data"]),
           //需要显示的频道
           showChannels(){
               if(this.isCollapsed){
-                  return this.channels.slice(0,8); //折叠状态只需要显示8个数据
+                  return this.data.slice(0,8); //折叠状态只需要显示8个数据
               }else{
                   //展开状态
-                  return this.channels;
+                  return this.data;
               }
           }
         },
-        async created() {
-            var resp = await getNewsChannels();
-            this.channels = resp;
-            //此时才有频道
-            this.switchTo(this.channels[0].channelId);
+        watch:{
+            data:{
+                immediate: true,
+                handler(){
+                    if(this.data.length >0 ){
+                        //此时才有频道, 默认选中第一个
+                        this.switchTo(this.data[0].channelId);
+                    }
+                }
+            }
         },
         methods:{
             //切换chooseId
